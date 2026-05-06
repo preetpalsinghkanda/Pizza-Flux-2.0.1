@@ -84,7 +84,7 @@ const qty = currentItem ? currentItem.qty : 0;
  if (!selectedPizza) return null;
 
   return (
-    <div className="no-scrollbar fixed inset-0 bg-black/90 flex justify-center items-center z-50 overflow-y-auto py-20">
+    <div className="no-scrollbar fixed inset-0 bg-black/90 flex justify-center items-center z-50 overflow-y-auto ">
       <div className="bg-[black] border border-[#ffffff3c] rounded-4xl text-white pizza-customize m-auto max-w-lg px-8">
         <span
           onClick={() => setSelectedPizza(null)}
@@ -96,7 +96,7 @@ const qty = currentItem ? currentItem.qty : 0;
           <img
             src={selectedPizza.pizzaImg}
             alt=""
-            className="w-full h-[300px] object-cover"
+            className="w-full h-[260px] object-cover"
           />
           <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
           <div className="absolute">
