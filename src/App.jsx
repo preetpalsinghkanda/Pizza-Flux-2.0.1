@@ -39,7 +39,7 @@ const App = () => {
             path="/menu"
             element={
               <>
-                <PizzaMenuHero />
+                {/* <PizzaMenuHero /> */}
                 <PizzaMenu />
               </>
             }

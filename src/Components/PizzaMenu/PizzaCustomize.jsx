@@ -12,13 +12,13 @@ import {
 } from "../../Redux/Features/PizzaPriceSlice";
 
 import {
- removeFromCart ,
+  removeFromCart,
   PizzaCartDecrement,
   addToCart,
 } from "../../Redux/Features/PizzaCart";
 
 const PizzaCustomize = () => {
-  
+
 
 
   const {
@@ -41,27 +41,27 @@ const PizzaCustomize = () => {
     (state) => state.PizzaPrice,
   );
 
-  
+
   const cartItems = useSelector((state) => state.PizzaCart.items);
   const cartCount = cartItems.length;
 
   const PizzaFinalPrice = basePrice + sizePrice + crustPrice + toppingsPrice;
 
- 
+
   const currentItem = selectedPizza
-  ? cartItems.find(
+    ? cartItems.find(
       (i) =>
         i.pizzaName === selectedPizza.pizzaName &&
-        i.size === size &&
-        i.crust === crust &&
-        i.toppings === toppings
+        i.size?.price === size?.price &&
+        i.crust?.price === crust?.price &&
+        i.toppings?.price === toppings?.price
     )
-  : null;
+    : null;
 
-const qty = currentItem ? currentItem.qty : 0;
+  const qty = currentItem ? currentItem.qty : 0;
 
- 
- useEffect(() => {
+
+  useEffect(() => {
     if (qty < 1) {
       setIsAddToCartEnabled(false);
     } else {
@@ -69,19 +69,25 @@ const qty = currentItem ? currentItem.qty : 0;
     }
   }, [qty]);
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (selectedPizza) {
 
-     if (selectedPizza) {
-    setSize(249);
-    setCrust(null);
-    setToppings(0);
-    dispatch(setSizePrice(249));
-    dispatch(setCrustPrice(0));
-    dispatch(setToppingsPrice(0));
-  }
-  },[selectedPizza])
+      setSize({
+        name: "Regular",
+        price: 249
+      });
 
- if (!selectedPizza) return null;
+      setCrust(null);
+
+      setToppings(null);
+
+      dispatch(setSizePrice(249));
+      dispatch(setCrustPrice(0));
+      dispatch(setToppingsPrice(0));
+    }
+  }, [selectedPizza]);
+
+  if (!selectedPizza) return null;
 
   return (
     <div className="no-scrollbar fixed inset-0 bg-black/90 flex justify-center items-center z-50 overflow-y-auto ">
@@ -115,7 +121,7 @@ const qty = currentItem ? currentItem.qty : 0;
             <div className="text-md flex gap-3">
               <span
                 onClick={() => {
-                  setSize({name: "Regular" , price : 249});
+                  setSize({ name: "Regular", price: 249 });
                   dispatch(setSizePrice(249));
                 }}
                 className={`${size?.price === 249 ? "bg-[#261b17] text-[#bf7e6b] border border-[#bf7e6b]" : "bg-[#262626] text-[#d3d3d3]"}  cursor-pointer  px-3 py-1.5 rounded-xl`}
@@ -124,16 +130,16 @@ const qty = currentItem ? currentItem.qty : 0;
               </span>
               <span
                 onClick={() => {
-                  setSize({name: "Medium" , price : 299});
+                  setSize({ name: "Medium", price: 299 });
                   dispatch(setSizePrice(299));
                 }}
-                className={`${size?.price  === 299 ? "bg-[#261b17] text-[#bf7e6b] border border-[#bf7e6b]" : "bg-[#262626] text-[#d3d3d3]"}  cursor-pointer px-3 py-1.5 rounded-xl`}
+                className={`${size?.price === 299 ? "bg-[#261b17] text-[#bf7e6b] border border-[#bf7e6b]" : "bg-[#262626] text-[#d3d3d3]"}  cursor-pointer px-3 py-1.5 rounded-xl`}
               >
                 Medium &nbsp; ₹<span className="text-sm">299</span>{" "}
               </span>
               <span
                 onClick={() => {
-                  setSize({name: "Large" , price : 349});
+                  setSize({ name: "Large", price: 349 });
                   dispatch(setSizePrice(349));
                 }}
                 className={`${size?.price === 349 ? "bg-[#261b17] text-[#bf7e6b] border border-[#bf7e6b]" : "bg-[#262626] text-[#d3d3d3]"} cursor-pointer  px-3 py-1.5 rounded-xl`}
@@ -152,7 +158,7 @@ const qty = currentItem ? currentItem.qty : 0;
                     setCrust(null);
                     dispatch(setCrustPrice(0));
                   } else {
-                   setCrust({ name: "Thin", price: 99 })
+                    setCrust({ name: "Thin", price: 99 })
                     dispatch(setCrustPrice(99));
                   }
                 }}
@@ -181,7 +187,7 @@ const qty = currentItem ? currentItem.qty : 0;
                     setCrust(null);
                     dispatch(setCrustPrice(0));
                   } else {
-                    setCrust({name: "pan" ,  price : 199})
+                    setCrust({ name: "pan", price: 199 })
                     dispatch(setCrustPrice(199));
                   }
                 }}
@@ -201,7 +207,7 @@ const qty = currentItem ? currentItem.qty : 0;
                     setToppings(null);
                     dispatch(setToppingsPrice(0));
                   } else {
-                    setToppings({name: "Olive" , price : 149});
+                    setToppings({ name: "Olive", price: 149 });
                     // setToppings(149);
                     dispatch(setToppingsPrice(149));
                   }
@@ -216,7 +222,7 @@ const qty = currentItem ? currentItem.qty : 0;
                     setToppings(null);
                     dispatch(setToppingsPrice(0));
                   } else {
-                    setToppings({name: "Corn" ,  price : 179})
+                    setToppings({ name: "Corn", price: 179 })
                     // setToppings(179);
                     dispatch(setToppingsPrice(179));
                   }
@@ -231,11 +237,11 @@ const qty = currentItem ? currentItem.qty : 0;
                     setToppings(null);
                     dispatch(setToppingsPrice(0));
                   } else {
-                    setToppings({name: "Extra Cheese" , price : 249});
+                    setToppings({ name: "Extra Cheese", price: 249 });
                     dispatch(setToppingsPrice(249));
                   }
                 }}
-                className={`${toppings?.price  === 249 ? "bg-[#261b17] text-[#bf7e6b] border border-[#bf7e6b]" : "bg-[#262626] text-[#d3d3d3]"}  cursor-pointer  px-3 py-1.5 rounded-xl`}
+                className={`${toppings?.price === 249 ? "bg-[#261b17] text-[#bf7e6b] border border-[#bf7e6b]" : "bg-[#262626] text-[#d3d3d3]"}  cursor-pointer  px-3 py-1.5 rounded-xl`}
               >
                 Extra Cheese&nbsp;&nbsp;₹
                 <span className="text-sm">249</span>{" "}
@@ -270,12 +276,12 @@ const qty = currentItem ? currentItem.qty : 0;
                   dispatch(
                     addToCart({
                       id: selectedPizza.id,
-                        pizzaImg: selectedPizza.pizzaImg,
+                      pizzaImg: selectedPizza.pizzaImg,
                       pizzaName: selectedPizza.pizzaName,
                       pizzaPrice:
                         basePrice + sizePrice + crustPrice + toppingsPrice,
                       size,
-                      crust : crust ,
+                      crust: crust,
                       toppings,
                     }),
                   );
@@ -292,7 +298,7 @@ const qty = currentItem ? currentItem.qty : 0;
                   addToCart({
                     id: selectedPizza.id,
                     pizzaName: selectedPizza.pizzaName,
-                    pizzaImg : selectedPizza.pizzaImg,
+                    pizzaImg: selectedPizza.pizzaImg,
                     pizzaPrice:
                       basePrice + sizePrice + crustPrice + toppingsPrice,
                     size,

@@ -16,7 +16,7 @@ const PizzaCart = createSlice({
                     item.pizzaName === pizzaName &&
                     item.size?.price === size?.price &&
                     item.crust?.price === crust?.price &&
-                     item.toppings?.price === toppings?.price
+                    JSON.stringify(item.toppings) === JSON.stringify(toppings)
             );
             if (alreadyItem) {
                 alreadyItem.qty += 1;
@@ -32,7 +32,7 @@ const PizzaCart = createSlice({
                         i.pizzaName === action.payload.pizzaName &&
                         i.size?.price === action.payload.size?.price &&
                         i.crust?.price === action.payload.crust?.price &&
-                        i.toppings?.price === action.payload.toppings?.price
+                        JSON.stringify(i.toppings) === JSON.stringify(action.payload.toppings)
                     )
             );
         },
@@ -43,7 +43,7 @@ const PizzaCart = createSlice({
                     i.pizzaName === action.payload.pizzaName &&
                     i.size?.price === action.payload.size?.price &&
                     i.crust?.price === action.payload.crust?.price &&
-                    i.toppings?.price === action.payload.toppings?.price
+                   JSON.stringify(i.toppings) === JSON.stringify(action.payload.toppings)
             );
 
             if (item) {
@@ -58,7 +58,7 @@ const PizzaCart = createSlice({
                     i.size?.price === action.payload.size?.price &&
                     i.crust?.price === action.payload.crust?.price &&
 
-                     i.toppings?.price === action.payload.toppings?.price
+                    JSON.stringify(i.toppings) === JSON.stringify(action.payload.toppings)
             );
 
             if (index !== -1) {
