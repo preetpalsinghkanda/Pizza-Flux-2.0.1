@@ -8,7 +8,7 @@ Made for a smooth user experience with fast navigation.
 ##  Live URL
 
 ### PC/Laptop
-https://flux20.netlify.app/
+https://flourishing-gnome-469428.netlify.app/
 
 ### Mobile/Phone
 https://pizzabypreet.netlify.app/
