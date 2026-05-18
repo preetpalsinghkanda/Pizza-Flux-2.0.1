@@ -11,7 +11,7 @@ Made for a smooth user experience with fast navigation.
 https://flux20.netlify.app/
 
 ### Mobile/Phone
-https://sprightly-babka-9fea35.netlify.app/
+https://pizzabypreet.netlify.app/
 
 ---
 
